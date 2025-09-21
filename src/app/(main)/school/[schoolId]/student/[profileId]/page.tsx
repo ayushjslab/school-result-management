@@ -75,7 +75,7 @@ export default function StudentProgressPage() {
     if (!editing) return;
     try {
       const res = await axios.patch(`/api/progress/edit`, { ...editing });
-      if (res.data.success && res.data.data) {
+      if (res.data.success) {
         setProgress((prev) =>
           prev.map((p) => (p.id === editing.id ? res.data.data : p))
         );
@@ -205,7 +205,9 @@ export default function StudentProgressPage() {
                   {editing?.id === p.id ? (
                     <input
                       type="number"
-                      value={editing.score ?? 0}
+                      value={
+                        Number.isNaN(editing?.score) ? 0 : editing?.score ?? 0
+                      }
                       onChange={(e) =>
                         setEditing({
                           ...editing,

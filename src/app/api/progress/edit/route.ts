@@ -52,7 +52,7 @@ export async function PATCH(req: NextRequest) {
       {
         message: "Progress updated successfully",
         success: true,
-        progress: data,
+        data,
       },
       { status: 200 }
     );
