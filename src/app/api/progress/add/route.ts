@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
     const { data, error } = await supabase
       .from("progress")
       .insert([{ student_id, classroom_id, subject, score, remarks }])
-      .select()
+      .select("id, subject, score, remarks, profiles(id, name, profileUrl)")
       .single();
 
     if (error || !data) {
@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
       {
         message: "Progress created successfully",
         success: true,
-        progress: data,
+        data,
       },
       { status: 201 }
     );

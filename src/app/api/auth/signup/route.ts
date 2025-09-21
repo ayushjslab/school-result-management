@@ -9,7 +9,6 @@ const JWT_SECRET = process.env.JWT_SECRET || "supersecret";
 export async function POST(req: Request) {
   try {
     const { email, password, name, role, school_id, profileUrl } = await req.json();
-    
 
     if (!email || !password) {
       return NextResponse.json(
@@ -73,6 +72,7 @@ export async function POST(req: Request) {
       user: data.user,
     });
   } catch (err: any) {
+    console.log(err)
     return NextResponse.json(
       { message: err.message || "Server error", success: false },
       { status: 500 }

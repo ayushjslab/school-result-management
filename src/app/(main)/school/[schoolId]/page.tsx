@@ -154,6 +154,7 @@ export default function SchoolPage() {
             </div>
           )}
         </div>
+        <button>Create </button>
       </div>
 
       {/* Stats */}
@@ -194,7 +195,7 @@ export default function SchoolPage() {
             <div
               key={c.id}
               className="bg-gray-900 rounded-lg p-4 border border-gray-700 hover:shadow-lg cursor-pointer"
-              onClick={() => router.push(`/classroom/${c.id}`)}
+              onClick={() => router.push(`/school/${schoolId}/classroom/${c.id}`)}
             >
               <h3 className="font-semibold text-gray-100">{c.name}</h3>
               <p className="text-sm text-gray-400 mt-1">
@@ -296,7 +297,10 @@ function ProfilesSection({
   profiles: Profile[];
   color: string;
 }) {
+  const router = useRouter();
+  const {schoolId} = useParams();
   return (
+
     <Section
       title={title}
       icon={<User className={`w-6 h-6 text-${color}-400`} />}
@@ -305,7 +309,8 @@ function ProfilesSection({
         {profiles.map((p) => (
           <div
             key={p.id}
-            className="bg-gray-900 rounded-xl p-6 border border-gray-700 hover:shadow-lg transition"
+            onClick={() => router.push(`/school/${schoolId}/student/${p.id}`)}
+            className="bg-gray-900 rounded-xl p-6 border border-gray-700 hover:shadow-lg transition cursor-pointer"
           >
             <div className="flex items-center space-x-4">
               <img

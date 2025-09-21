@@ -20,7 +20,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 1. Check token
     const token = (await cookies()).get("auth-token")?.value;
     if (!token) {
       return NextResponse.json(
@@ -29,7 +28,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 2. Decode token
     let decoded: { id: string; email: string };
     try {
       decoded = jwt.verify(token, JWT_SECRET) as { id: string; email: string };
@@ -40,7 +38,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 3. Fetch profile
     const { data: profile, error: profileError } = await supabase
       .from("profiles")
       .select("id, role, school_id")
@@ -64,7 +61,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 4. Create classroom
     const { data: newClassroom, error: classroomError } = await supabase
       .from("classrooms")
       .insert([{ name, school_id: profile.school_id, teacher_id }])

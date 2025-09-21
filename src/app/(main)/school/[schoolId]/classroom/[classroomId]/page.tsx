@@ -5,7 +5,7 @@
 import axios from "axios";
 import { motion } from "framer-motion";
 import { BookOpen, User, Users } from "lucide-react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface Profile {
@@ -26,10 +26,12 @@ export default function ClassroomPage() {
   const [classroomData, setClassroomData] = useState<ClassroomData | null>(
     null
   );
+
+  const router = useRouter()
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const { classroomId } = useParams();
+  const { classroomId, schoolId } = useParams();
 
   async function fetchClassRoomData() {
     try {
@@ -70,12 +72,18 @@ export default function ClassroomPage() {
     );
   }
 
-  const students = classroomData.progress?.map((p) => p.profiles) || [];
+ const students = Array.from(
+   new Map(
+     (classroomData.progress?.map((p) => p.profiles) || []).map((profile) => [
+       profile.id,
+       profile,
+     ])
+   ).values()
+ );
 
   return (
     <div className="bg-black min-h-screen text-gray-100 py-12 px-6">
       <div className="max-w-6xl mx-auto">
-        {/* Classroom Header */}
         <motion.div
           initial={{ opacity: 0, y: -40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -120,16 +128,29 @@ export default function ClassroomPage() {
           </motion.div>
         )}
 
-        {/* Students Section */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.5 }}
           className="mt-14"
         >
-          <div className="flex items-center gap-3 mb-8">
-            <Users className="w-7 h-7 text-green-400" />
-            <h2 className="text-3xl font-bold">Students</h2>
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-3">
+              <Users className="w-7 h-7 text-green-400" />
+              <h2 className="text-3xl font-bold">Students</h2>
+            </div>
+
+            {/* ✅ Add Student Button */}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() =>
+                router.push(`/school/${schoolId}/classroom/${classroomId}/add-student`)
+              }
+              className="px-5 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold shadow-md hover:shadow-blue-500/40 transition"
+            >
+              + Add Student
+            </motion.button>
           </div>
 
           {students.length > 0 ? (

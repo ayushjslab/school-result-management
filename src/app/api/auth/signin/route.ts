@@ -17,7 +17,6 @@ export async function POST(req: Request) {
       );
     }
 
-    // ✅ no await 
     const cookieStore = cookies();
     const existingToken = (await cookieStore).get("auth-token")?.value;
 
@@ -52,6 +51,8 @@ export async function POST(req: Request) {
       email,
       password,
     });
+
+    console.log(error)
 
     if (error) {
       return NextResponse.json(

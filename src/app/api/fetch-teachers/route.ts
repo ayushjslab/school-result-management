@@ -3,40 +3,30 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
   try {
-    const classroomId = req.nextUrl.searchParams.get("classroomId");
-    const { data, error } = await supabase
-      .from("classrooms")
-      .select(
-        `
-    id,
-    name,
-    teacher:profiles!classrooms_teacher_id_fkey (
-      id, name, profileUrl, role
-    ),
+    const schoolId = req.nextUrl.searchParams.get("schoolId");
 
-    progress (
-      profiles (
-        id, name, profileUrl, role
-      )
-    )
+    const { data, error } = await supabase
+      .from("profiles")
+      .select(
+        `id,name,
+        profileUrl
   `
       )
-      .eq("id", classroomId)
-      .single();
-
+      .eq("school_id", schoolId)
+      .eq("role", "teacher");
 
     if (error) {
       return NextResponse.json(
         {
+          message: error.message || "Something is wrong",
           success: false,
-          message: error?.message,
         },
         { status: 400 }
       );
     }
     return NextResponse.json(
       {
-        message: "Data fetched successfully",
+        message: "All data fetched",
         success: true,
         data,
       },
