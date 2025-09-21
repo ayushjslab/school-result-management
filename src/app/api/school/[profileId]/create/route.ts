@@ -7,12 +7,12 @@ export async function POST(
 ) {
   try {
     const { profileId } = await params;
-    const { name } = await req.json();
+    const { name, email, location, phone, logoUrl, bannerUrl } = await req.json();
 
-    if (!name) {
+    if (!name || !email || !location || !phone || !logoUrl || !bannerUrl) {
       return NextResponse.json(
         {
-          message: "School name is required",
+          message: "School fields are required",
           sccess: false,
         },
         { status: 401 }
@@ -20,7 +20,7 @@ export async function POST(
     }
     const { data: newSchool, error: schoolError } = await supabase
       .from("schools")
-      .insert([{ name }])
+      .insert([{ name, email, location, phone, logoUrl, bannerUrl }])
       .select()
       .single();
 

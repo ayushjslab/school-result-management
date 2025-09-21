@@ -31,7 +31,7 @@ export async function GET() {
         return NextResponse.json({
             message: "User is not authenticated",
             success: false
-        }, {status: 400})
+        })
       }
     }
 
@@ -39,8 +39,7 @@ export async function GET() {
       {
         message: "User is not authenticated",
         success: false,
-      },
-      { status: 400 }
+      }
     );
   } catch (error) {
     console.log(error);

@@ -17,6 +17,7 @@ export async function POST(req: Request) {
       );
     }
 
+    // ✅ no await 
     const cookieStore = cookies();
     const existingToken = (await cookieStore).get("auth-token")?.value;
 
@@ -33,8 +34,6 @@ export async function POST(req: Request) {
           .eq("id", decoded.id)
           .single();
 
-          console.log(profile)
-
         if (profile && !error) {
           return NextResponse.json({
             message: "Already signed in",
@@ -43,8 +42,8 @@ export async function POST(req: Request) {
             success: true,
           });
         }
-      } catch (error) {
-        console.log(error)
+      } catch (err) {
+        console.log(err)
         console.warn("Invalid/expired token, re-authenticating...");
       }
     }
@@ -62,10 +61,9 @@ export async function POST(req: Request) {
     }
 
     const user = data.user;
-    const session = data.session;
 
     if (user) {
-      const { data: profile} = await supabase
+      const { data: profile } = await supabase
         .from("profiles")
         .select("*")
         .eq("id", user.id)
@@ -76,6 +74,7 @@ export async function POST(req: Request) {
           {
             id: user.id,
             email: user.email,
+            role: "student", 
           },
         ]);
       }
@@ -91,18 +90,18 @@ export async function POST(req: Request) {
       message: "Signin successful",
       user,
       success: true,
-      session,
     });
 
     response.cookies.set("auth-token", newToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       path: "/",
-      maxAge: 60 * 60 * 24 * 7, 
+      maxAge: 60 * 60 * 24 * 7,
     });
 
     return response;
   } catch (err: any) {
+    console.log(err)
     return NextResponse.json(
       { message: err.message || "Server error", success: false },
       { status: 500 }
