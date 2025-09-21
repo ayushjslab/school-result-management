@@ -11,9 +11,10 @@ import {
   Phone,
   Mail,
   ImageOff,
+  PlusCircle,
 } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
-
+import { motion } from "framer-motion";
 interface Classroom {
   id: string;
   name: string;
@@ -44,7 +45,6 @@ interface SchoolType {
 export default function SchoolPage() {
   const [schoolData, setSchoolData] = useState<SchoolType | null>(null);
   const [loading, setLoading] = useState(true);
-
   const { schoolId } = useParams();
   const router = useRouter();
 
@@ -131,7 +131,6 @@ export default function SchoolPage() {
         </div>
       </div>
 
-      {/* School Info */}
       <div className="mt-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold text-gray-100">{schoolData.name}</h1>
         <div className="flex items-center space-x-6 mt-2 text-gray-400 flex-wrap">
@@ -154,7 +153,19 @@ export default function SchoolPage() {
             </div>
           )}
         </div>
-        <button>Create </button>
+        <motion.button
+          whileHover={{ scale: 1.05, y: -2 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => router.push(`/school/${schoolId}/classroom/create`)}
+          className="flex items-center gap-2 px-6 py-3 rounded-2xl
+                 bg-gradient-to-r from-indigo-500 via-blue-500 to-sky-500
+                 text-white font-semibold shadow-lg hover:shadow-xl
+                 focus:outline-none focus:ring-2 focus:ring-blue-300 mt-4
+                 transition-all duration-300"
+        >
+          <PlusCircle className="w-5 h-5" />
+          Create Classroom
+        </motion.button>
       </div>
 
       {/* Stats */}
@@ -195,7 +206,9 @@ export default function SchoolPage() {
             <div
               key={c.id}
               className="bg-gray-900 rounded-lg p-4 border border-gray-700 hover:shadow-lg cursor-pointer"
-              onClick={() => router.push(`/school/${schoolId}/classroom/${c.id}`)}
+              onClick={() =>
+                router.push(`/school/${schoolId}/classroom/${c.id}`)
+              }
             >
               <h3 className="font-semibold text-gray-100">{c.name}</h3>
               <p className="text-sm text-gray-400 mt-1">

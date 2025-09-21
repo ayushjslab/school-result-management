@@ -77,12 +77,9 @@ export default function AddStudentsPage() {
   // Remove student
   async function handleRemove(studentId: string) {
     try {
-      const res = await axios.delete(`/api/classrooms/remove-student`, {
-        data: {
-          student_id: studentId,
-          classroom_id: classroomId,
-        },
-      });
+      const res = await axios.delete(
+        `/api/classrooms/remove-student/${classroomId}?studentId=${studentId}`
+      );
       if (res.data.success) {
         toast.success("Student removed!");
         fetchStudents();

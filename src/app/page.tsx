@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
-"use client"
+"use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   School,
@@ -25,12 +25,21 @@ import {
   Building,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+
+interface Profile {
+  id: string;
+  name: string;
+  profileUrl: string | null;
+  school_id: string;
+  role: string;
+}
 
 const HomePage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const router = useRouter();
-
+  const [user, setUser] = useState<Profile | null>(null);
   const features = [
     {
       icon: BarChart3,
@@ -113,6 +122,24 @@ const HomePage = () => {
     },
   ];
 
+  async function fetchUserData() {
+    try {
+      const res = await axios.get("/api/authorization"); // server checks cookie + JWT
+
+      if (res.data.success) {
+        setUser(res.data.profile);
+      } else {
+        setUser(null);
+      }
+    } catch (error) {
+      console.error(error);
+      setUser(null);
+    }
+  }
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
       {/* Animated background */}
@@ -156,21 +183,75 @@ const HomePage = () => {
             >
               Testimonials
             </a>
-            <motion.button
-              onClick={() => router.push("/auth")}
-              className="text-gray-300 hover:text-white transition-colors"
-              whileHover={{ scale: 1.05 }}
-            >
-              Sign In
-            </motion.button>
-            <motion.button
-              onClick={() => router.push("/auth")}
-              className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 px-6 py-2 rounded-xl font-semibold transition-all duration-300"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Get Started
-            </motion.button>
+            <div className="flex items-center gap-4">
+              {user ? (
+                <>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    className="flex items-center gap-3 cursor-pointer"
+                    onClick={() => router.push(`/student-profile/${user.id}`)}
+                  >
+                    <img
+                      src={
+                        user.profileUrl ||
+                        `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                          user.name || "User"
+                        )}`
+                      }
+                      alt={user.name}
+                      className="w-10 h-10 rounded-full border border-purple-500"
+                    />
+                    <span className="text-gray-200 font-medium">
+                      {user.name}
+                    </span>
+                  </motion.div>
+
+                  {user.role !== "student" && (
+                    <motion.button
+                      onClick={async () => {
+                        router.push(`/school/${user.school_id}`);
+                      }}
+                      className="bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 px-5 py-2 rounded-xl font-semibold transition-all duration-300 text-white"
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Dashboard
+                    </motion.button>
+                  )}
+                  <motion.button
+                    onClick={async () => {
+                      await axios.post("/api/logout");
+                      setUser(null);
+                      router.push("/auth");
+                    }}
+                    className="bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 px-5 py-2 rounded-xl font-semibold transition-all duration-300 text-white"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Logout
+                  </motion.button>
+                </>
+              ) : (
+                <>
+                  <motion.button
+                    onClick={() => router.push("/auth")}
+                    className="text-gray-300 hover:text-white transition-colors"
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    Sign In
+                  </motion.button>
+
+                  <motion.button
+                    onClick={() => router.push("/auth")}
+                    className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 px-6 py-2 rounded-xl font-semibold transition-all duration-300 text-white"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Get Started
+                  </motion.button>
+                </>
+              )}
+            </div>
           </div>
 
           {/* Mobile Menu Button */}

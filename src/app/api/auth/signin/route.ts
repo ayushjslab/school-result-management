@@ -52,7 +52,6 @@ export async function POST(req: Request) {
       password,
     });
 
-    console.log(error)
 
     if (error) {
       return NextResponse.json(
@@ -62,6 +61,7 @@ export async function POST(req: Request) {
     }
 
     const user = data.user;
+    let schoolId;
 
     if (user) {
       const { data: profile } = await supabase
@@ -69,6 +69,8 @@ export async function POST(req: Request) {
         .select("*")
         .eq("id", user.id)
         .single();
+
+        schoolId = profile.school_id;
 
       if (!profile) {
         await supabase.from("profiles").insert([
@@ -90,6 +92,7 @@ export async function POST(req: Request) {
     const response = NextResponse.json({
       message: "Signin successful",
       user,
+      schoolId,
       success: true,
     });
 

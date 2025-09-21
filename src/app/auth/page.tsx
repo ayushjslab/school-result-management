@@ -59,6 +59,7 @@ function AuthPage() {
         if (res.data.success) {
           toast.success(res.data.message);
         }
+         router.push(`/school/${res.data.schoolId}`);
       } else {
         const res = await axios.post(`/api/auth/signin`, {
           email: formData.email,
@@ -67,8 +68,8 @@ function AuthPage() {
         if (res.data.success) {
           toast.success(res.data.message);
         }
+        router.push(`/school/${res.data.schoolId}`)
       }
-      router.push(`/school`)
     } catch (error) {
       console.log(error);
       toast.error("Internal server error");
