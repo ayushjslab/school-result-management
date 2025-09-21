@@ -142,7 +142,6 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
-      {/* Animated background */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
@@ -150,7 +149,6 @@ const HomePage = () => {
       </div>
 
       <div className="relative z-10">
-        {/* Navigation */}
         <motion.nav
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -163,7 +161,6 @@ const HomePage = () => {
             </h1>
           </div>
 
-          {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
             <a
               href="#features"
@@ -254,7 +251,6 @@ const HomePage = () => {
             </div>
           </div>
 
-          {/* Mobile Menu Button */}
           <motion.button
             className="lg:hidden text-white"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -264,7 +260,6 @@ const HomePage = () => {
           </motion.button>
         </motion.nav>
 
-        {/* Mobile Menu */}
         {isMenuOpen && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -307,7 +302,6 @@ const HomePage = () => {
           </motion.div>
         )}
 
-        {/* Hero Section */}
         <section className="px-6 lg:px-12 py-20 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -333,7 +327,6 @@ const HomePage = () => {
               designed for students, teachers, and schools worldwide.
             </motion.p>
 
-            {/* CTA Buttons */}
             <motion.div
               className="flex flex-col sm:flex-row gap-6 justify-center items-center"
               initial={{ opacity: 0, y: 20 }}
@@ -379,7 +372,6 @@ const HomePage = () => {
           </motion.div>
         </section>
 
-        {/* Stats Section */}
         <section className="px-6 lg:px-12 py-16">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
@@ -405,7 +397,6 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* Features Section */}
         <section id="features" className="px-6 lg:px-12 py-20">
           <div className="max-w-6xl mx-auto">
             <motion.div
@@ -450,7 +441,6 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* About Section */}
         <section id="about" className="px-6 lg:px-12 py-20">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -528,7 +518,6 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* Testimonials Section */}
         <section id="testimonials" className="px-6 lg:px-12 py-20">
           <div className="max-w-6xl mx-auto">
             <motion.div
@@ -589,7 +578,6 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* CTA Section */}
         <section className="px-6 lg:px-12 py-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -631,7 +619,6 @@ const HomePage = () => {
           </motion.div>
         </section>
 
-        {/* Footer */}
         <footer className="px-6 lg:px-12 py-12 border-t border-gray-800">
           <div className="max-w-6xl mx-auto">
             <div className="flex flex-col md:flex-row justify-between items-center">

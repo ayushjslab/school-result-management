@@ -53,7 +53,6 @@ export default function AddStudentsPage() {
     if (classroomId) fetchStudents();
   }, [classroomId]);
 
-  // Add student
   async function handleAdd(studentId: string) {
     try {
       const res = await axios.post(
@@ -74,7 +73,6 @@ export default function AddStudentsPage() {
     }
   }
 
-  // Remove student
   async function handleRemove(studentId: string) {
     try {
       const res = await axios.delete(

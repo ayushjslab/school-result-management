@@ -94,7 +94,6 @@ export default function CreateClassroomForm() {
       </h2>
 
       <form onSubmit={handleSubmit} className="space-y-5">
-        {/* Classroom Name */}
         <div>
           <label className="block text-gray-300 text-sm mb-2">
             Classroom Name
@@ -112,7 +111,6 @@ export default function CreateClassroomForm() {
           </div>
         </div>
 
-        {/* Custom Teacher Dropdown */}
         <div>
           <label className="block text-gray-300 text-sm mb-2">
             Assign Teacher
@@ -183,7 +181,6 @@ export default function CreateClassroomForm() {
           {error && <p className="text-red-400 text-sm mt-2">{error}</p>}
         </div>
 
-        {/* Submit Button */}
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}

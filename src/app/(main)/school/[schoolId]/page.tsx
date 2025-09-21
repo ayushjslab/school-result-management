@@ -102,7 +102,6 @@ export default function SchoolPage() {
 
   return (
     <div className="bg-black min-h-screen text-gray-100">
-      {/* Banner */}
       <div className="relative w-full h-60 bg-gray-800">
         {schoolData.bannerUrl ? (
           <img
@@ -115,7 +114,6 @@ export default function SchoolPage() {
             <ImageOff className="w-8 h-8 mr-2" /> No Banner Image
           </div>
         )}
-        {/* Logo */}
         <div className="absolute -bottom-12 left-8">
           {schoolData.logoUrl ? (
             <img
@@ -168,7 +166,6 @@ export default function SchoolPage() {
         </motion.button>
       </div>
 
-      {/* Stats */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-1 md:grid-cols-4 gap-6">
         <StatCard
           title="School Head"
@@ -196,7 +193,6 @@ export default function SchoolPage() {
         />
       </div>
 
-      {/* Classrooms */}
       <Section
         title="Classrooms"
         icon={<School className="w-6 h-6 text-orange-400" />}
@@ -219,7 +215,6 @@ export default function SchoolPage() {
         </div>
       </Section>
 
-      {/* Heads */}
       {heads.length > 0 && (
         <ProfilesSection
           title="School Leadership"
@@ -228,7 +223,6 @@ export default function SchoolPage() {
         />
       )}
 
-      {/* Teachers */}
       {teachers.length > 0 ? (
         <ProfilesSection
           title={`Teachers (${teachers.length})`}
@@ -243,7 +237,6 @@ export default function SchoolPage() {
         />
       )}
 
-      {/* Students */}
       {students.length > 0 && (
         <ProfilesSection
           title={`Students (${students.length})`}

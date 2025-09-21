@@ -56,7 +56,6 @@ export default function HeadSignupForm() {
       </h2>
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Full Name */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
@@ -76,7 +75,6 @@ export default function HeadSignupForm() {
           />
         </motion.div>
 
-        {/* Email */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
@@ -96,7 +94,6 @@ export default function HeadSignupForm() {
           />
         </motion.div>
 
-        {/* Password */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
@@ -116,7 +113,6 @@ export default function HeadSignupForm() {
           />
         </motion.div>
 
-        {/* Profile Image URL */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
@@ -140,7 +136,6 @@ export default function HeadSignupForm() {
             />
           </div>
 
-          {/* Preview */}
           {formData.profileUrl && (
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -157,10 +152,8 @@ export default function HeadSignupForm() {
           )}
         </motion.div>
 
-        {/* Hidden Role */}
         <input type="hidden" name="role" value="head" />
 
-        {/* Submit */}
         <motion.button
           type="submit"
           disabled={isLoading}

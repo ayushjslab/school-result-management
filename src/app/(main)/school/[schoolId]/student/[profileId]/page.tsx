@@ -141,7 +141,6 @@ export default function StudentProgressPage() {
         Go Back
       </motion.button>
 
-      {/* Student Details */}
       {student && (
         <div className="flex items-center space-x-4 mb-8">
           <img
@@ -159,7 +158,6 @@ export default function StudentProgressPage() {
         </div>
       )}
 
-      {/* Progress Table */}
       <h3 className="text-xl font-semibold text-blue-400 mb-4 flex items-center gap-2">
         <GraduationCap className="w-5 h-5" /> Progress Report
       </h3>
@@ -269,7 +267,6 @@ export default function StudentProgressPage() {
         </table>
       </div>
 
-      {/* Add Progress Form */}
       <div className="mt-6 p-4 rounded-xl bg-white/5 border border-white/10">
         <h4 className="text-lg font-semibold text-pink-400 mb-3 flex items-center gap-2">
           <PlusCircle className="w-5 h-5" /> Add Progress

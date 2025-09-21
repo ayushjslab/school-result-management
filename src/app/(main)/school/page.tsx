@@ -402,7 +402,6 @@ const SchoolDashboard: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
-      {/* Animated background */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
@@ -410,7 +409,6 @@ const SchoolDashboard: React.FC = () => {
       </div>
 
       <div className="relative z-10 p-6">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -441,7 +439,6 @@ const SchoolDashboard: React.FC = () => {
             </div>
           </div>
 
-          {/* Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
             {[
               {
@@ -490,7 +487,6 @@ const SchoolDashboard: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* Navigation Tabs */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -515,7 +511,6 @@ const SchoolDashboard: React.FC = () => {
           ))}
         </motion.div>
 
-        {/* Content */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
@@ -526,7 +521,6 @@ const SchoolDashboard: React.FC = () => {
           >
             {activeTab === "overview" && (
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                {/* Class Progress Chart */}
                 <div className="bg-gray-900/50 backdrop-blur-xl border border-gray-800 rounded-2xl p-6">
                   <div className="flex items-center mb-4">
                     <TrendingUp className="text-purple-400 mr-2" size={24} />
@@ -539,7 +533,6 @@ const SchoolDashboard: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Grade Distribution */}
                 <div className="bg-gray-900/50 backdrop-blur-xl border border-gray-800 rounded-2xl p-6">
                   <div className="flex items-center mb-4">
                     <PieChart className="text-blue-400 mr-2" size={24} />
@@ -555,7 +548,6 @@ const SchoolDashboard: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Monthly Progress */}
                 <div className="lg:col-span-2 bg-gray-900/50 backdrop-blur-xl border border-gray-800 rounded-2xl p-6">
                   <div className="flex items-center mb-4">
                     <Activity className="text-pink-400 mr-2" size={24} />

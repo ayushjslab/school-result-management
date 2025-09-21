@@ -56,7 +56,6 @@ export default function SchoolForm() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        {/* Left - Form */}
         <motion.div
           className="space-y-6"
           initial={{ opacity: 0, x: -20 }}
@@ -125,7 +124,6 @@ export default function SchoolForm() {
             </div>
           ))}
 
-          {/* Submit */}
           <motion.button
             type="button"
             className="w-full mt-4 bg-gradient-to-r from-purple-500 to-blue-500 
@@ -149,14 +147,12 @@ export default function SchoolForm() {
           </motion.button>
         </motion.div>
 
-        {/* Right - Sexy Preview Card */}
         <motion.div
           className="bg-gray-800/50 border border-gray-700 rounded-2xl p-6 flex flex-col justify-center shadow-lg"
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.5 }}
         >
-          {/* Banner */}
           <div className="relative">
             <img
               src={
@@ -166,7 +162,6 @@ export default function SchoolForm() {
               alt="Banner"
               className="w-full h-40 object-cover rounded-xl border border-gray-700"
             />
-            {/* Logo */}
             <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2">
               <img
                 src={
@@ -179,7 +174,6 @@ export default function SchoolForm() {
             </div>
           </div>
 
-          {/* Info */}
           <div className="mt-14 text-center space-y-2">
             <h3 className="text-2xl font-bold text-white">
               {formData.name || "Your School Name"}

@@ -95,7 +95,6 @@ export default function ClassroomPage() {
           <p className="text-gray-400 mt-3 text-lg">Classroom Overview</p>
         </motion.div>
 
-        {/* Teacher Section */}
         {classroomData.teacher && (
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -140,7 +139,6 @@ export default function ClassroomPage() {
               <h2 className="text-3xl font-bold">Students</h2>
             </div>
 
-            {/* ✅ Add Student Button */}
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
