@@ -94,25 +94,25 @@ const HomePage = () => {
 
   const testimonials = [
     {
-      name: "Dr. Sarah Johnson",
-      role: "Principal, Westfield Academy",
+      name: "Dr. Vinod Kumar sharma",
+      role: "Principal, Oswal Jain Sr. Sec. School",
       content:
         "EduPortal transformed our school management. The analytics help us make data-driven decisions.",
       avatar:
-        "https://images.pexels.com/photos/1181519/pexels-photo-1181519.jpeg?auto=compress&cs=tinysrgb&w=150",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW2-xPqqgMBCwYmjVNfu_diJPtI__eNuNQnPnMD5VHnBTXX5COYRCjC5k4cDdj5h65dVg&usqp=CAU",
       rating: 5,
     },
     {
-      name: "Prof. Michael Chen",
-      role: "Mathematics Teacher",
+      name: "Dr. Bilkha Singh",
+      role: "Arya Kannya School",
       content:
         "The platform makes teaching interactive and engaging. My students love the progress tracking.",
       avatar:
-        "https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=150",
+        "https://media.licdn.com/dms/image/v2/D4E10AQHLjLOx4dZs4w/image-shrink_800/image-shrink_800/0/1705090149228?e=2147483647&v=beta&t=NBE-FBPRvqrbVnp_uqkrOVbCQ9FGvVnUoqSlSzBVStM",
       rating: 5,
     },
     {
-      name: "Emma Rodriguez",
+      name: "Mahima Rathore",
       role: "Student, Grade 12",
       content:
         "I can track my progress and connect with teachers easily. It made learning so much better!",
@@ -208,7 +208,7 @@ const HomePage = () => {
                       onClick={async () => {
                         router.push(`/school/${user.school_id}`);
                       }}
-                      className="bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 px-5 py-2 rounded-xl font-semibold transition-all duration-300 text-white"
+                      className="bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 px-5 py-2 rounded-md font-semibold transition-all duration-300 text-white"
                       whileHover={{ scale: 1.05, y: -2 }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -221,7 +221,7 @@ const HomePage = () => {
                       setUser(null);
                       router.push("/auth");
                     }}
-                    className="bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 px-5 py-2 rounded-xl font-semibold transition-all duration-300 text-white"
+                    className="bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 px-5 py-2 rounded-md font-semibold transition-all duration-300 text-white"
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                   >
