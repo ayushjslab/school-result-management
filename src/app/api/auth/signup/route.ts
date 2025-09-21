@@ -8,12 +8,11 @@ const JWT_SECRET = process.env.JWT_SECRET || "supersecret";
 
 export async function POST(req: Request) {
   try {
-    const { email, password, name, role, school_id, profileUrl } = await req.json();
+    const { email, password, name, role, school_id, profileUrl, rollnumber } = await req.json();
 
     if (!email || !password) {
       return NextResponse.json(
         { message: "Email and password are required", success: false },
-        { status: 400 }
       );
     }
 
@@ -32,7 +31,8 @@ export async function POST(req: Request) {
                 name: name || "",
                 role: role || "student",
                 school_id: school_id || null,
-                profileUrl: profileUrl || ""
+                profileUrl: profileUrl || "",
+                rollnumber: rollnumber || "",
               },
             ]);
 

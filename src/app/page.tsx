@@ -26,6 +26,7 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { toast } from "sonner";
 
 interface Profile {
   id: string;
@@ -154,7 +155,7 @@ const HomePage = () => {
           animate={{ opacity: 1, y: 0 }}
           className="flex items-center justify-between p-6 lg:px-12"
         >
-          <div className="flex items-center">
+          <div className="flex items-center hover:scale-110 cursor-pointer">
             <Sparkles className="text-purple-400 mr-2" size={32} />
             <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
               EduPortal
@@ -219,6 +220,7 @@ const HomePage = () => {
                     onClick={async () => {
                       await axios.post("/api/logout");
                       setUser(null);
+                      toast.success("Logout successfully");
                       router.push("/auth");
                     }}
                     className="bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 px-5 py-2 rounded-md font-semibold transition-all duration-300 text-white"
@@ -334,7 +336,7 @@ const HomePage = () => {
               transition={{ delay: 0.6, duration: 0.8 }}
             >
               <motion.button
-                onClick={() => router.push("/create-school")}
+                onClick={() => router.push("/head-signup")}
                 className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 px-8 py-4 rounded-xl font-semibold text-lg flex items-center group shadow-lg shadow-purple-500/25"
                 whileHover={{ scale: 1.05, y: -3 }}
                 whileTap={{ scale: 0.95 }}

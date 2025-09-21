@@ -281,7 +281,7 @@ export default function StudentProgressPage() {
           />
           <input
             type="number"
-            value={newScore}
+            value={newScore ?? 0}
             onChange={(e) => setNewScore(parseInt(e.target.value))}
             placeholder="Marks"
             className="bg-black/50 border border-white/20 px-3 py-2 rounded-lg text-white placeholder-gray-500"

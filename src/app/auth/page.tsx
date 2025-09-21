@@ -13,11 +13,13 @@ import {
   EyeOff,
   ArrowRight,
   Sparkles,
+  IdCard,
 } from "lucide-react";
 import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { CiImageOn } from "react-icons/ci";
+import Link from "next/link";
 
 interface ISchool {
   id: string;
@@ -33,9 +35,10 @@ function AuthPage() {
     name: "",
     email: "",
     password: "",
-    role: "",
+    role: "student",
     school: "",
     profileUrl: "",
+    rollnumber: ""
   });
 
   const router = useRouter();
@@ -115,10 +118,21 @@ function AuthPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
         >
-          <div className="flex items-center justify-center mb-4">
-            <Sparkles className="text-purple-400 mr-2" size={32} />
-            <h1 className="text-3xl font-bold text-white">EduPortal</h1>
-          </div>
+          <Link
+            href="/"
+            className="flex items-center justify-center
+                 hover:scale-110 
+                 transition-all duration-300 cursor-pointer"
+          >
+            <Sparkles
+              className="text-purple-400 mr-2 drop-shadow-lg"
+              size={32}
+            />
+            <h1 className="text-3xl font-bold text-white tracking-wide">
+              EduPortal
+            </h1>
+          </Link>
+
           <p className="text-gray-400">Welcome to the future of education</p>
         </motion.div>
 
@@ -294,6 +308,30 @@ function AuthPage() {
                           onChange={handleInputChange}
                           className="w-full pl-12 pr-4 py-3 bg-gray-800/50 border border-gray-700 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-300"
                           placeholder="Enter your full name"
+                          required
+                        />
+                      </div>
+                    </motion.div>
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.15 }}
+                    >
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                        Roll Number
+                      </label>
+                      <div className="relative">
+                        <IdCard
+                          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                          size={20}
+                        />
+                        <input
+                          type="text"
+                          name="rollnumber"
+                          value={formData.rollnumber}
+                          onChange={handleInputChange}
+                          className="w-full pl-12 pr-4 py-3 bg-gray-800/50 border border-gray-700 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-300"
+                          placeholder="Enter your roll number"
                           required
                         />
                       </div>

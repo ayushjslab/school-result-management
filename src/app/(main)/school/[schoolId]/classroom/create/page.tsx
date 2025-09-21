@@ -22,7 +22,6 @@ export default function CreateClassroomForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
-
   const { schoolId } = useParams();
 
   useEffect(() => {
@@ -50,22 +49,21 @@ export default function CreateClassroomForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log({ name, teacher });
     try {
-      setLoading(true)
+      setLoading(true);
       const res = await axios.post(`/api/classrooms/create`, {
         name,
         teacher_id: teacher?.id,
       });
-      if(res.data.success) {
-        toast.success(res.data.message)
-        router.push(`/school/${schoolId}`)
+      if (res.data.success) {
+        toast.success(res.data.message);
+        router.push(`/school/${schoolId}`);
       }
     } catch (error) {
       console.log(error);
-      toast.error("Internal server error")
-    }finally{
-      setLoading(false)
+      toast.error("Internal server error");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -73,27 +71,28 @@ export default function CreateClassroomForm() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="max-w-md mx-auto mt-10 p-6 rounded-2xl shadow-lg flex flex-col items-center justify-center
-                 bg-black/40 backdrop-blur-lg border border-white/10"
+      className="max-w-lg w-full mx-auto mt-16 p-8 rounded-2xl shadow-2xl
+                 bg-black/40 backdrop-blur-xl border border-white/10"
     >
       <motion.button
         whileHover={{ scale: 1.05, y: -2 }}
         whileTap={{ scale: 0.95 }}
-        onClick={() => window.history.back()}
-        className="flex items-center justify-center gap-2 px-6 py-2 rounded-2xl
-                 bg-gradient-to-r from-blue-500 via-sky-500 to-cyan-500
-                 text-white font-semibold shadow-lg hover:shadow-xl
-                 focus:outline-none focus:ring-2 focus:ring-sky-300
-                 transition-all duration-300 mb-4"
+        onClick={() => router.back()}
+        className="flex items-center gap-2 px-5 py-2 rounded-xl
+                   bg-gradient-to-r from-blue-500 via-sky-500 to-cyan-500
+                   text-white font-semibold shadow-lg hover:shadow-xl
+                   focus:outline-none focus:ring-2 focus:ring-sky-300
+                   transition-all duration-300 mb-6"
       >
         <ArrowLeft className="w-5 h-5" />
         Go Back
       </motion.button>
-      <h2 className="text-2xl font-bold text-pink-400 mb-6 text-center">
+
+      <h2 className="text-3xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-blue-400 mb-8">
         Create Classroom
       </h2>
 
-      <form onSubmit={handleSubmit} className="space-y-5">
+      <form onSubmit={handleSubmit} className="space-y-6">
         <div>
           <label className="block text-gray-300 text-sm mb-2">
             Classroom Name

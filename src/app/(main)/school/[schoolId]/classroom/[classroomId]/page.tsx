@@ -26,11 +26,10 @@ export default function ClassroomPage() {
   const [classroomData, setClassroomData] = useState<ClassroomData | null>(
     null
   );
-
-  const router = useRouter()
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const router = useRouter();
   const { classroomId, schoolId } = useParams();
 
   async function fetchClassRoomData() {
@@ -72,35 +71,45 @@ export default function ClassroomPage() {
     );
   }
 
- const students = Array.from(
-   new Map(
-     (classroomData.progress?.map((p) => p.profiles) || []).map((profile) => [
-       profile.id,
-       profile,
-     ])
-   ).values()
- );
+  // ✅ Ensure unique students
+  const students = Array.from(
+    new Map(
+      (classroomData.progress?.map((p) => p.profiles) || []).map((profile) => [
+        profile.id,
+        profile,
+      ])
+    ).values()
+  );
 
   return (
     <div className="bg-black min-h-screen text-gray-100 py-12 px-6">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto space-y-14">
+        {/* Classroom Header */}
         <motion.div
           initial={{ opacity: 0, y: -40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="bg-gradient-to-r from-indigo-900 via-purple-900 to-pink-900 rounded-3xl shadow-2xl p-12 text-center"
+          className="bg-gradient-to-r from-indigo-900 via-purple-900 to-pink-900 
+                     rounded-3xl shadow-2xl p-12 text-center border border-white/10"
         >
-          <BookOpen className="w-14 h-14 mx-auto text-purple-300 mb-4" />
-          <h1 className="text-5xl font-extrabold">{classroomData.name}</h1>
-          <p className="text-gray-400 mt-3 text-lg">Classroom Overview</p>
+          <BookOpen className="w-16 h-16 mx-auto text-purple-300 mb-4" />
+          <h1 className="text-5xl font-extrabold text-white">
+            {classroomData.name}
+          </h1>
+          <p className="text-gray-400 mt-3 text-lg tracking-wide">
+            Classroom Overview
+          </p>
         </motion.div>
 
+        {/* Teacher Card */}
         {classroomData.teacher && (
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="bg-gray-900 rounded-2xl shadow-lg p-8 mt-14 flex flex-col sm:flex-row items-center gap-8 border border-gray-800 hover:border-purple-600 transition"
+            className="bg-white/5 backdrop-blur-xl rounded-2xl shadow-lg p-8 
+                       flex flex-col sm:flex-row items-center gap-8 border border-white/10
+                       hover:border-purple-400/40 transition"
           >
             <img
               src={
@@ -110,10 +119,10 @@ export default function ClassroomPage() {
                 )}`
               }
               alt={classroomData.teacher.name}
-              className="w-32 h-32 rounded-full object-cover border-4 border-gray-800 shadow-md"
+              className="w-32 h-32 rounded-full object-cover border-4 border-gray-700 shadow-lg"
             />
             <div className="text-center sm:text-left">
-              <h2 className="text-3xl font-bold">
+              <h2 className="text-3xl font-bold text-white">
                 {classroomData.teacher.name}
               </h2>
               <p className="text-purple-400 text-lg mt-1">Class Teacher</p>
@@ -127,11 +136,11 @@ export default function ClassroomPage() {
           </motion.div>
         )}
 
+        {/* Students Section */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-14"
         >
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-3">
@@ -143,9 +152,13 @@ export default function ClassroomPage() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() =>
-                router.push(`/school/${schoolId}/classroom/${classroomId}/add-student`)
+                router.push(
+                  `/school/${schoolId}/classroom/${classroomId}/add-student`
+                )
               }
-              className="px-5 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold shadow-md hover:shadow-blue-500/40 transition"
+              className="px-5 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 
+                         text-white font-semibold shadow-md hover:shadow-blue-500/40 
+                         transition"
             >
               + Add Student
             </motion.button>
@@ -160,7 +173,8 @@ export default function ClassroomPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
                   whileHover={{ scale: 1.05 }}
-                  className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-6 text-center border border-gray-800 hover:border-green-500 transition shadow-md"
+                  className="bg-white/5 backdrop-blur-lg rounded-2xl p-6 text-center 
+                             border border-white/10 hover:border-green-400/40 transition shadow-md"
                 >
                   <img
                     src={

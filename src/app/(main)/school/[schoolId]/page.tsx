@@ -15,6 +15,8 @@ import {
 } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import clsx from "clsx";
+
 interface Classroom {
   id: string;
   name: string;
@@ -70,7 +72,6 @@ export default function SchoolPage() {
     if (schoolId) fetchSchool();
   }, [schoolId]);
 
-
   const formatDate = (dateString?: string) => {
     if (!dateString) return "N/A";
     return new Date(dateString).toLocaleDateString("en-US", {
@@ -102,6 +103,7 @@ export default function SchoolPage() {
 
   return (
     <div className="bg-black min-h-screen text-gray-100">
+      {/* Banner & Logo */}
       <div className="relative w-full h-60 bg-gray-800">
         {schoolData.bannerUrl ? (
           <img
@@ -129,6 +131,7 @@ export default function SchoolPage() {
         </div>
       </div>
 
+      {/* School Info */}
       <div className="mt-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold text-gray-100">{schoolData.name}</h1>
         <div className="flex items-center space-x-6 mt-2 text-gray-400 flex-wrap">
@@ -151,6 +154,8 @@ export default function SchoolPage() {
             </div>
           )}
         </div>
+
+        {/* Create classroom button */}
         <motion.button
           whileHover={{ scale: 1.05, y: -2 }}
           whileTap={{ scale: 0.95 }}
@@ -166,6 +171,7 @@ export default function SchoolPage() {
         </motion.button>
       </div>
 
+      {/* Stats */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-1 md:grid-cols-4 gap-6">
         <StatCard
           title="School Head"
@@ -193,6 +199,7 @@ export default function SchoolPage() {
         />
       </div>
 
+      {/* Sections */}
       <Section
         title="Classrooms"
         icon={<School className="w-6 h-6 text-orange-400" />}
@@ -257,11 +264,21 @@ function StatCard({
   title: string;
   value: number;
   icon: React.ReactNode;
-  color: string;
+  color: "purple" | "blue" | "green" | "orange";
 }) {
+  const colorMap = {
+    purple: "border-purple-400",
+    blue: "border-blue-400",
+    green: "border-green-400",
+    orange: "border-orange-400",
+  };
+
   return (
     <div
-      className={`bg-gray-900 rounded-xl shadow-md p-6 border-l-4 border-${color}-400`}
+      className={clsx(
+        "bg-gray-900 rounded-xl shadow-md p-6 border-l-4",
+        colorMap[color]
+      )}
     >
       <div className="flex items-center justify-between">
         <div>
@@ -301,12 +318,12 @@ function ProfilesSection({
 }: {
   title: string;
   profiles: Profile[];
-  color: string;
+  color: "purple" | "blue" | "green";
 }) {
   const router = useRouter();
-  const {schoolId} = useParams();
-  return (
+  const { schoolId } = useParams();
 
+  return (
     <Section
       title={title}
       icon={<User className={`w-6 h-6 text-${color}-400`} />}
